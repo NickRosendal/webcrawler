@@ -1,0 +1,7 @@
+http://www.energy.de/index.php?eID=energyplaylistfl&datepicker=#day#.#month#.#year#&startTime=#under#%3A00&station=berlin
+#day#
+#month#
+#year#
+#under#
+NRJ
+\\\\n\\\\t\\\\t\\\\t\\\\t\\\\t<td>(?!\\d{2}(?:\\.|:)\\d{2}|<img|\\\\)(.*?)<\\\\/td>\\\\n\\\\t\\\\t\\\\t\\\\t\\\\t<td id=\\\\\"openWebradioStationid\\\\\"><span id=\\\\\"1\\\\\" style=\\\\\"color: rgb\\(226, 0, 26\\);\\\\\">Webradio starten<span><\\\\/td>\\\\n\\\\t\\\\t\\\\t\\\\t\\\\t<td>(.*?)<\\\\/td>

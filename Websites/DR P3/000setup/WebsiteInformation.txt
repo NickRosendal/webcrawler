@@ -1,0 +1,8 @@
+http://www.dr.dk/Playlister/feeds/searchSimple/searchSimple.drxml?cid=P3&d=#day#&m=#month#&y=#year#
+#day#
+#month#
+#year#
+
+DR
+<span class=\"artist\">(.*?)</span></span><span><span class=\"title\">(.*?)</span>
+http://www.dr.dk/Playlister/feeds/getPlaylist/getPlaylist.drxml?pid=#pid#&date=#year#-#month#-#day#

@@ -1,0 +1,7 @@
+http://www.thevoice.dk/component/nowplaying/?dp=#under#&day=#year#-#month#-#day#
+#day#
+#month#
+#year#
+#under#
+int
+<span class=\"artist\">(.*?)</span>[\w\W]+?<span class=\"titel\">(.*?)</span>

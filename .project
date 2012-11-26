@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>webCrawler 12-09-17</name>
+	<name>webCrawlerWithGit</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -14,6 +14,13 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>web-project</name>
+			<type>2</type>
+			<locationURI>PARENT-1-PROJECT_LOC/web-project</locationURI>
+		</link>
+	</linkedResources>
 	<variableList>
 		<variable>
 			<name>Joda</name>

@@ -1,5 +1,6 @@
 package datamining;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import org.joda.time.LocalDate;
@@ -8,7 +9,7 @@ import domain.MusicNumber;
 import domain.WebsiteInformation;
 
 public class StrategyTheVoice {
-	Set<MusicNumber> artistNumberMap = new HashSet<MusicNumber>();
+	ArrayList<MusicNumber> artistNumberMap = new ArrayList<MusicNumber>();
 
 	public StrategyTheVoice(WebsiteInformation _websiteInformation, LocalDate date_) {
 //		System.out.println("### What the voice Crawler knows ###");
@@ -24,7 +25,7 @@ public class StrategyTheVoice {
 		PageCrawler myCrawler = new PageCrawler();
 
 		int UnderPageURLValue = 0;
-		Set<MusicNumber> LastArtistNumberMap = new HashSet<MusicNumber>();
+		ArrayList<MusicNumber> LastArtistNumberMap = new ArrayList<MusicNumber>();
 
 		boolean canIgo = true;
 		while (canIgo) {
@@ -41,7 +42,7 @@ public class StrategyTheVoice {
 			urlString = urlString.replaceFirst(_websiteInformation.getUnderPageURL(), UnderPageURLValue + "");
 			UnderPageURLValue++;
 
-			Set<MusicNumber> tempArtistNumberMap = myCrawler.crawler(urlString, _websiteInformation, true);
+			ArrayList<MusicNumber> tempArtistNumberMap = myCrawler.crawler(date_, urlString, _websiteInformation, true);
 			artistNumberMap.addAll(tempArtistNumberMap);
 
 			// Loop exit check
@@ -56,7 +57,7 @@ public class StrategyTheVoice {
 
 	}
 
-	public Set<MusicNumber> getArtistNumberMap() {
+	public ArrayList<MusicNumber> getArtistNumberMap() {
 		return artistNumberMap;
 	}
 }

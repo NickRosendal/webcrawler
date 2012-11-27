@@ -24,15 +24,15 @@ public class Website implements Subject
 {
 	private String websiteTitle;
 	private WebsiteInformation myInformation;
-	private Set<MusicNumber> masterMap = new HashSet<MusicNumber>();
-	private TreeMap<LocalDate, Set<MusicNumber>> dayArtistNumberMap = new TreeMap<LocalDate, Set<MusicNumber>>();
+	private ArrayList<MusicNumber> masterMap = new ArrayList<MusicNumber>();
+	private TreeMap<LocalDate, ArrayList<MusicNumber>> dayArtistNumberMap = new TreeMap<LocalDate, ArrayList<MusicNumber>>();
 
 	public Website(String inWebsiteTitle)
 	{
 		websiteTitle = inWebsiteTitle;
 	}
 
-	public void addDay(LocalDate inDate, Set<MusicNumber> inMusicNumber)
+	public void addDay(LocalDate inDate, ArrayList<MusicNumber> inMusicNumber)
 	{
 		inMusicNumber.removeAll(masterMap);
 
@@ -41,7 +41,7 @@ public class Website implements Subject
 
 	}
 
-	public TreeMap<LocalDate, Set<MusicNumber>> getDays()
+	public TreeMap<LocalDate, ArrayList<MusicNumber>> getDays()
 	{
 		return dayArtistNumberMap;
 	}
@@ -54,10 +54,10 @@ public class Website implements Subject
 
 	}
 
-	public HashSet<MusicNumber> getSongsOfDay(LocalDate dateToPull)
+	public ArrayList<MusicNumber> getSongsOfDay(LocalDate dateToPull)
 	{
-		HashSet returnHas = new HashSet();
-		returnHas = (HashSet) dayArtistNumberMap.get(dateToPull);
+		ArrayList returnHas = new ArrayList();
+		returnHas = (ArrayList) dayArtistNumberMap.get(dateToPull);
 		return returnHas;
 
 	}
@@ -65,7 +65,7 @@ public class Website implements Subject
 	@Override
 	public String toString()
 	{
-		Set<Entry<LocalDate, Set<MusicNumber>>> dayArtistNumberMapSet = dayArtistNumberMap.entrySet();
+		Set<Entry<LocalDate, ArrayList<MusicNumber>>> dayArtistNumberMapSet = dayArtistNumberMap.entrySet();
 		Iterator i = dayArtistNumberMapSet.iterator();
 		String returnString = new String();
 		while (i.hasNext())
@@ -96,7 +96,7 @@ public class Website implements Subject
 		return returnString;
 	}
 
-	public TreeMap<LocalDate, Set<MusicNumber>> getDayArtistNumberMap()
+	public TreeMap<LocalDate, ArrayList<MusicNumber>> getDayArtistNumberMap()
 	{
 		return dayArtistNumberMap;
 	}

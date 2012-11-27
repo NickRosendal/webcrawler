@@ -106,7 +106,7 @@ public class Serilizar {
 
 				File dateFolder = new File("Websites/" + inWebsite.getWebsiteTitle() + "/" + folderDateString);
 
-				Set<MusicNumber> artistNumberMap = new HashSet<MusicNumber>();
+				ArrayList<MusicNumber> artistNumberMap = new ArrayList<MusicNumber>();
 
 				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -210,7 +210,7 @@ public class Serilizar {
 				throw new Exception("cannot create libary: " + myFile_.getName());
 			}
 		}
-		for (Map.Entry<LocalDate, Set<MusicNumber>> entry : inWebsite.getDayArtistNumberMap().entrySet()) {
+		for (Map.Entry<LocalDate, ArrayList<MusicNumber>> entry : inWebsite.getDayArtistNumberMap().entrySet()) {
 			String filePathString = "Websites/" + inWebsite.getWebsiteTitle() + "/"
 					+ ((LocalDate) entry.getKey()).year().get() + "-"
 					+ ((LocalDate) entry.getKey()).monthOfYear().get() + "-"
@@ -221,7 +221,7 @@ public class Serilizar {
 			{
 				// System.out.println("Libery " + myFile_.toString());
 
-				for (MusicNumber key : (Set<MusicNumber>) entry.getValue()) {
+				for (MusicNumber key : (ArrayList<MusicNumber>) entry.getValue()) {
 					// System.out.println(key.toString() + " ");
 					storeObject(filePathString, key);
 

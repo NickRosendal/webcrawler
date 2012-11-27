@@ -12,6 +12,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NavigableMap;
@@ -334,19 +335,19 @@ public class TheShit
 		DefaultMutableTreeNode root = null;
 
 		//navigablemap da vi så kan bruge descendingmap, til at vende det om
-		NavigableMap<LocalDate,Set<MusicNumber>> myTreeMap = localWebsite.getDays();
+		NavigableMap<LocalDate,ArrayList<MusicNumber>> myTreeMap = localWebsite.getDays();
 		
 		root = new DefaultMutableTreeNode("hidden");// ADD HIDDEN TOP ROOT
 		
 
 		myTreeMap = myTreeMap.descendingMap();
-		for (Map.Entry<LocalDate, Set<MusicNumber>> entry : myTreeMap.entrySet())
+		for (Map.Entry<LocalDate, ArrayList<MusicNumber>> entry : myTreeMap.entrySet())
 			
 		{// ADD DAYS
 			LocalDate key = entry.getKey();
-			Set<MusicNumber> value = entry.getValue();
+			ArrayList<MusicNumber> value = entry.getValue();
 
-			Set<MusicNumber> mySet = entry.getValue();
+			ArrayList<MusicNumber> mySet = entry.getValue();
 			Iterator itr = mySet.iterator();
 
 			DefaultMutableTreeNode Day = new DefaultMutableTreeNode(key);
@@ -402,7 +403,7 @@ public class TheShit
 		
 
 
-		TreeMap<LocalDate, Set<MusicNumber>> dayArtistNumberMap = localWebsite.getDayArtistNumberMap();
+		TreeMap<LocalDate, ArrayList<MusicNumber>> dayArtistNumberMap = localWebsite.getDayArtistNumberMap();
 
 		for (LocalDate folderName : dayArtistNumberMap.keySet())
 		{

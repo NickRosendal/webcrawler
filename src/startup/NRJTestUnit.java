@@ -103,12 +103,12 @@ public class NRJTestUnit
 	}
 
 	//@Test
-	public void canTranslateThingyes()
-	{
-		MusicNumberFormatter myMusicNumberFormatter = new MusicNumberFormatter();
-		MusicNumber myMusicNumber = new MusicNumber("", "Snoop Dogg vs. David Guetta : Sweat\\/Wet ");
-		myMusicNumberFormatter.checkAndCorrect(myMusicNumber);
-	}
+//	public void canTranslateThingyes()
+//	{
+//		MusicNumberFormatter myMusicNumberFormatter = new MusicNumberFormatter();
+//		MusicNumber myMusicNumber = new MusicNumber("", "Snoop Dogg vs. David Guetta : Sweat\\/Wet ");
+//		myMusicNumberFormatter.checkAndCorrect(myMusicNumber);
+//	}
 
 //	//@Test
 //	public void ANRJWebsiteCanStoreADateOnDisk()

@@ -1,5 +1,6 @@
 package datamining;
 
+import java.util.ArrayList;
 import java.util.Set;
 import org.joda.time.LocalDate;
 
@@ -16,7 +17,7 @@ public class DayCrawler
 		myWebsiteInformation = inWebsiteInformation;
 	}
 
-	public Set<MusicNumber> crawlDay(LocalDate inDate)
+	public ArrayList<MusicNumber> crawlDay(LocalDate inDate)
 	{
 		if (myWebsiteInformation.getUnderPageURLType().equals("int"))
 		{

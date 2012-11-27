@@ -11,23 +11,33 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
+
 import domain.MusicNumber;
 import domain.WebsiteInformation;
 
 public class PageCrawler {
 
 	// private String lastCrawledPageString;
-	public Set<MusicNumber> crawler(String inTarget, WebsiteInformation _websiteInformation, boolean artistNameFirst) {
-		Set<MusicNumber> artistNumberMap = new HashSet<MusicNumber>();
+	public ArrayList<MusicNumber> crawler(LocalDate date, String inTarget, WebsiteInformation _websiteInformation, boolean artistNameFirst) {
+		ArrayList<MusicNumber> artistNumberMap = new ArrayList<MusicNumber>();
 		String pageString = readPage(inTarget);
 		Matcher matcher = _websiteInformation.getRegExMusicNumberPattern().matcher(pageString);
 		while (matcher.find()) {
 			MusicNumber tempMusicNumber;
+		
+			LocalTime myTime = new LocalTime(matcher.group(1));
+			DateTime myDateTime = new DateTime(date.toString() + "T" + myTime.toString());
+	//	System.out.println(myDateTime.toString());
+			
 			if (artistNameFirst) {
-				tempMusicNumber = new MusicNumber(matcher.group(1), matcher.group(2));
+				tempMusicNumber = new MusicNumber(myDateTime, matcher.group(2), matcher.group(3));
 			} else {
-				tempMusicNumber = new MusicNumber(matcher.group(2), matcher.group(1));
+				tempMusicNumber = new MusicNumber(myDateTime, matcher.group(3), matcher.group(2));
 			}
+			
 			ArrayList<String> negativeList = _websiteInformation.getNegativeListStringArray();
 			MusicNumberFormatter myMusicNumberFormatter = new MusicNumberFormatter();
 
@@ -51,7 +61,7 @@ public class PageCrawler {
 					}
 				}
 				if (foundMatch == false) {
-
+					System.out.println(tempMusicNumber.toString());
 					artistNumberMap.add(tempMusicNumber);
 				} else {
 					System.out.println("number on negative list " + tempMusicNumber.toString());

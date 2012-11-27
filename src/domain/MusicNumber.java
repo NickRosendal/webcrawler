@@ -1,6 +1,11 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.joda.time.DateTime;
 
 public class MusicNumber implements Serializable
 {
@@ -11,11 +16,31 @@ public class MusicNumber implements Serializable
 	private static final long serialVersionUID = 1L;
 	private String artist;
 	private String title;
+	private String remix;
+	private Set<String> featuredArtists = new HashSet<String>();
+	private DateTime dateAndTime;
 
 	public MusicNumber(String inArtist, String inTitle)
 	{
 		artist = inArtist;
 		title = inTitle;
+	}
+
+	public MusicNumber(DateTime inDateAndTime, String inArtist, String inTitle)
+	{
+		dateAndTime = inDateAndTime;
+		artist = inArtist;
+		title = inTitle;
+	}
+
+	public DateTime getDateAndTime()
+	{
+		return dateAndTime;
+	}
+
+	public void setDateAndTime(DateTime dateAndTime)
+	{
+		this.dateAndTime = dateAndTime;
 	}
 
 	public String getArtist()
@@ -38,10 +63,59 @@ public class MusicNumber implements Serializable
 		this.title = title;
 	}
 
+	public String getRemix()
+	{
+		return remix;
+	}
+
+	public void setRemix(String remix)
+	{
+		this.remix = remix;
+	}
+
+	public void addFeaturedArtists(String inArtist)
+	{
+		featuredArtists.add(inArtist);
+	}
+
+	public void removeFeaturedArtists(String artistToRemove)
+	{
+		featuredArtists.remove(artistToRemove);
+	}
+
+	public Set<String> getFeaturedArtists()
+	{
+		return featuredArtists;
+	}
+
+	public void setFeaturedArtists(Set<String> featuredArtists)
+	{
+		this.featuredArtists = featuredArtists;
+	}
+
 	@Override
 	public String toString()
 	{
-		return artist + " - " + title;
+		String returnString = "";
+		if (dateAndTime != null)
+		{
+			returnString += dateAndTime.toString();
+		}
+		returnString += " " + artist + " ";
+		if (featuredArtists != null)
+			if (featuredArtists.size() > 0)
+			{
+				{
+					returnString += "F. ";
+					for (String i : featuredArtists)
+					{
+						returnString += i + " ";
+					}
+				}
+			}
+		returnString += "- " + title;
+		return returnString;
+
 	}
 
 	@Override
@@ -56,6 +130,17 @@ public class MusicNumber implements Serializable
 		{
 			hashcode = 31 * hashcode + title.charAt(i);
 		}
+		int j = 1;
+		if (dateAndTime != null)
+		{
+			for (int i = 0; i < dateAndTime.toString().length(); ++i)
+			{
+				char c = dateAndTime.toString().charAt(i);
+				j = +(int) c;
+
+			}
+		}
+		hashcode = hashcode * j;
 		// System.out.println("in hash code");
 		// System.out.println(" value is " + hashcode);
 		return hashcode;
@@ -68,12 +153,12 @@ public class MusicNumber implements Serializable
 			return false;
 		if (obj == this)
 			return true;
-		if (obj.getClass() != getClass())
+		if (obj.getClass() != getClass()) // if the object we compare to is not
+											// the same type
 			return false;
 		MusicNumber rhs = (MusicNumber) obj;
-		if (rhs.getArtist().equals(artist) && rhs.getTitle().equals(title))
+		if (rhs.getDateAndTime() != null & rhs.getArtist().equals(artist) && rhs.getTitle().equals(title) && rhs.getDateAndTime().equals(dateAndTime))
 		{
-
 			return true;
 		}
 

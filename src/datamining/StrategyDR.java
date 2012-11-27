@@ -13,7 +13,7 @@ import domain.WebsiteInformation;
 
 public class StrategyDR
 {
-	Set<MusicNumber> artistNumberMap = new HashSet<MusicNumber>();
+	ArrayList<MusicNumber> artistNumberMap = new ArrayList<MusicNumber>();
 
 	public StrategyDR(WebsiteInformation _websiteInformation, LocalDate _date)
 	{
@@ -41,7 +41,7 @@ public class StrategyDR
 			underPageUrl = underPageUrl.replace(_websiteInformation.getDay(), _date.dayOfMonth().get() + "");
 			underPageUrl = underPageUrl.replace("#pid#", matcher.group(1));
 			
-			Set<MusicNumber> tempArtistNumberMap = myCrawler.crawler(underPageUrl,_websiteInformation,true);
+			ArrayList<MusicNumber> tempArtistNumberMap = myCrawler.crawler(_date, underPageUrl,_websiteInformation,true);
 			artistNumberMap.addAll(tempArtistNumberMap);
 			
 			//System.out.println(underPageString);
@@ -50,7 +50,7 @@ public class StrategyDR
 		}
 	}
 
-	public Set<MusicNumber> getArtistNumberMap()
+	public ArrayList<MusicNumber> getArtistNumberMap()
 	{
 		return artistNumberMap;
 	}

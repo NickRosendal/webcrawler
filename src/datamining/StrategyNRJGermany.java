@@ -1,5 +1,6 @@
 package datamining;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,7 +11,7 @@ import domain.WebsiteInformation;
 
 public class StrategyNRJGermany
 {
-	Set<MusicNumber> artistNumberMap = new HashSet<MusicNumber>();
+	ArrayList<MusicNumber> artistNumberMap = new ArrayList<MusicNumber>();
 	PageCrawler myCrawler = new PageCrawler();
 
 	public StrategyNRJGermany(WebsiteInformation website_, LocalDate date_)
@@ -26,12 +27,12 @@ public class StrategyNRJGermany
 			urlString = urlString.replace(website_.getUnderPageURL(), i + "");
 
 			// ScreenScrape the website with the url for each underpage
-			Set<MusicNumber> tempArtistNumberMap = myCrawler.crawler(urlString, website_, false);
+			ArrayList<MusicNumber> tempArtistNumberMap = myCrawler.crawler(date_, urlString, website_, false);
 			artistNumberMap.addAll(tempArtistNumberMap);
 		}
 	}
 
-	public Set<MusicNumber> getArtistNumberMap()
+	public ArrayList<MusicNumber> getArtistNumberMap()
 	{
 		return artistNumberMap;
 	}

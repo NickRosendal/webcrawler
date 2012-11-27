@@ -11,7 +11,8 @@ public class MusicNumberFormatter
 
 	public MusicNumber checkAndCorrect(MusicNumber _targetNumber)
 	{
-	//	System.out.print(_targetNumber.getArtist() + " : " + _targetNumber.getTitle());
+		// System.out.print(_targetNumber.getArtist() + " : " +
+		// _targetNumber.getTitle());
 		_targetNumber.setArtist(removeUnicodeEscapes(_targetNumber.getArtist()));
 		_targetNumber.setTitle(removeUnicodeEscapes(_targetNumber.getTitle()));
 
@@ -23,15 +24,44 @@ public class MusicNumberFormatter
 		checkAndCorrectArtistAndTitle(_targetNumber, "&amp;", "");
 		checkAndCorrectArtistAndTitle(_targetNumber, "\\?", "");
 		checkAndCorrectArtistAndTitle(_targetNumber, "\\t", "");
-		_targetNumber = featMover(_targetNumber);
-		_targetNumber.setArtist(replaceString(_targetNumber.getArtist(), "(?i)feat\\.", "F."));
+		
 		_targetNumber.setArtist(capitalizeString(_targetNumber.getArtist()));
 		_targetNumber.setTitle(capitalizeString(_targetNumber.getTitle()));
-//		System.out.println(" == " + _targetNumber.getArtist() + " : "+ _targetNumber.getTitle());
-		if (_targetNumber.getArtist() == null) {
+		
+		Pattern regex = Pattern.compile("\\((.*?)\\)");
+		Matcher regexMatcher = regex.matcher(_targetNumber.getTitle());
+		String remixString;
+		while (regexMatcher.find()) {
+			remixString = regexMatcher.group(1);
+			System.out.println("remixString: " + remixString);
+			
+			Pattern regex2 = Pattern.compile("(?i)mix");
+			Matcher regexMatcher2 = regex2.matcher(remixString);
+			if (regexMatcher2.find()) {
+				System.out.println("it is a remix");
+				_targetNumber.setRemix(regexMatcher.group(1));
+				_targetNumber.setTitle(_targetNumber.getTitle().replace("(" + remixString + ")", ""));
+			}
+			
+			Pattern regex3 = Pattern.compile("(?i)Radio Edit|Original");
+			Matcher regexMatcher3 = regex3.matcher(remixString);
+			if (regexMatcher3.find()) {
+				System.out.println("it is a Radio Edit|Original");
+				_targetNumber.setTitle(_targetNumber.getTitle().replace("(" + remixString + ")", ""));
+			}
+		} 
+		
+
+		_targetNumber = featMover(_targetNumber);
+
+		// System.out.println(" == " + _targetNumber.getArtist() + " : "+
+		// _targetNumber.getTitle());
+		if (_targetNumber.getArtist() == null)
+		{
 			_targetNumber.setArtist("");
 		}
-		if (_targetNumber.getTitle() == null) {
+		if (_targetNumber.getTitle() == null)
+		{
 			_targetNumber.setTitle("");
 		}
 		return _targetNumber;
@@ -100,17 +130,38 @@ public class MusicNumberFormatter
 
 		String artist = testNumber.getArtist();
 		String title = testNumber.getTitle();
-		String regex = " feat\\.(.*)";
-
+		String regex = " Feat\\.(.*)";
+		String featuredArtists = "";
 		Pattern r = Pattern.compile(regex);
+
 		Matcher m = r.matcher(title);
 		while (m.find())
 		{
-			artist += " f." + m.group(1);
+			featuredArtists += m.group(1);
 			title = m.replaceAll("");
+		}
+		m = r.matcher(artist);
+		while (m.find())
+		{
+			featuredArtists += m.group(1);
+			artist = m.replaceAll("");
 		}
 		testNumber.setArtist(artist);
 		testNumber.setTitle(title);
+
+		regex = "& (.*)";
+		r = Pattern.compile(regex);
+		m = r.matcher(featuredArtists);
+		while (m.find())
+		{
+			 testNumber.addFeaturedArtists(m.group(1).trim());
+
+		}
+		featuredArtists = m.replaceAll("");
+		if (featuredArtists.length() > 0)
+		{
+			testNumber.addFeaturedArtists(featuredArtists.trim());
+		}
 		return testNumber;
 	}
 }

@@ -37,7 +37,7 @@ public class DRTestUnit
 	@Test
 	public void drShouldReadAPage()
 	{
-		DayCrawler myCrawler = new DayCrawler(testWebsiteInformation);
+		DayCrawler myCrawler = new DayCrawler(testWebsiteInformation, "DR P3");
 		LocalDate dayTotRead = new LocalDate(2012, 6, 15);
 		int readMusicnumbersCount = myCrawler.crawlDay(dayTotRead).size();
 		assertTrue(0 < readMusicnumbersCount);

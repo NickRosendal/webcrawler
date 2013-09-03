@@ -14,6 +14,7 @@ public class MusicNumber implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private String station;
 	private String artist;
 	private String title;
 	private String remix;
@@ -91,6 +92,16 @@ public class MusicNumber implements Serializable
 	public void setFeaturedArtists(Set<String> featuredArtists)
 	{
 		this.featuredArtists = featuredArtists;
+	}
+
+	public String getStation()
+	{
+		return station;
+	}
+
+	public void setStation(String station)
+	{
+		this.station = station;
 	}
 
 	@Override

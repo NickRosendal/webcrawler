@@ -56,12 +56,12 @@ public class NRJTestUnit
 				"http://www.thevoice.dk/component/nowplaying/?dp=#under#&day=#year#-#month#-#day#", "#day#", "#month#", "#year#", "#under#", "int",
 				Pattern.compile("<span class=\"artist\">(.*)</span>[\\w\\W]+?<span class=\"titel\">(.*)+?</span>"));
 		// LocalDate myDate = new LocalDate(2012, 4, 1);
-		DayCrawler myCrawler = new DayCrawler(theVoiceWebsiteInformation);
+		
 		// int readMusicnumbersCount = myCrawler.crawlDay(myDate).size();
 		// assertTrue(0 < readMusicnumbersCount);
 
 		Website theVoice = new Website("The Voice");
-
+		DayCrawler myCrawler = new DayCrawler(theVoiceWebsiteInformation,theVoice.getWebsiteTitle());
 		LocalDate dayToStartRead = new LocalDate(2012, 6, 15);
 		;
 		LocalDate dayToReadTo = LocalDate.now().plusDays(1);
@@ -95,7 +95,7 @@ public class NRJTestUnit
 				"#under#",
 				"NRJ",
 				Pattern.compile("\\\\n\\\\t\\\\t\\\\t\\\\t\\\\t<td>(?!<img|\\d|\\\\n)(.*?)<\\\\/td>.*?\\\\n\\\\t\\\\t\\\\t\\\\t\\\\t<td>(.*?)<\\\\/td>(?<=<\\\\/td>)"));
-		DayCrawler myCrawler = new DayCrawler(NRJWebsiteInformation);
+		DayCrawler myCrawler = new DayCrawler(NRJWebsiteInformation, "NRJ");
 		LocalDate myDate = new LocalDate(2012, 1, 2);
 		int readMusicnumbersCount = myCrawler.crawlDay(myDate).size();
 		assertTrue(0 < readMusicnumbersCount);

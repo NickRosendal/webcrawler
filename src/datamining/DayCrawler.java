@@ -2,6 +2,9 @@ package datamining;
 
 import java.util.ArrayList;
 import java.util.Set;
+
+import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
+
 import org.joda.time.LocalDate;
 
 import domain.MusicNumber;
@@ -11,27 +14,32 @@ public class DayCrawler
 {
 
 	private WebsiteInformation myWebsiteInformation;
-
-	public DayCrawler(WebsiteInformation inWebsiteInformation)
+private String websiteName;
+	public DayCrawler(WebsiteInformation inWebsiteInformation, String inWebsiteName)
 	{
 		myWebsiteInformation = inWebsiteInformation;
+		websiteName = inWebsiteName;
 	}
 
 	public ArrayList<MusicNumber> crawlDay(LocalDate inDate)
 	{
+		ArrayList<MusicNumber> returnList = new ArrayList<MusicNumber>();
 		if (myWebsiteInformation.getUnderPageURLType().equals("int"))
 		{
 			StrategyTheVoice myStrategyTheVoice = new StrategyTheVoice(myWebsiteInformation, inDate);
-			return myStrategyTheVoice.getArtistNumberMap();
+			returnList = myStrategyTheVoice.getArtistNumberMap();
 		} else if (myWebsiteInformation.getUnderPageURLType().equals("NRJ"))
 		{
 			StrategyNRJGermany myStrategyNRJGermany = new StrategyNRJGermany(myWebsiteInformation, inDate);
-			return myStrategyNRJGermany.getArtistNumberMap();
+			returnList = myStrategyNRJGermany.getArtistNumberMap();
 		} else if (myWebsiteInformation.getUnderPageURLType().equals("DR")){
 			StrategyDR myStrategyDR = new StrategyDR(myWebsiteInformation, inDate);
-			return myStrategyDR.getArtistNumberMap();
+			returnList = myStrategyDR.getArtistNumberMap();
 		}
-		return null;
+		for(MusicNumber i: returnList){
+			i.setStation(websiteName);
+		}
+		return returnList;
 	}
 
 }

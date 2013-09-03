@@ -43,10 +43,10 @@ public class MusicNumberFormatter
 				_targetNumber.setTitle(_targetNumber.getTitle().replace("(" + remixString + ")", ""));
 			}
 			
-			Pattern regex3 = Pattern.compile("(?i)Radio Edit|Original");
+			Pattern regex3 = Pattern.compile("(?i)Radio Edit|Original|Album Version");
 			Matcher regexMatcher3 = regex3.matcher(remixString);
 			if (regexMatcher3.find()) {
-				System.out.println("it is a Radio Edit|Original");
+				System.out.println("it is a Radio Edit|Original|Album Version");
 				_targetNumber.setTitle(_targetNumber.getTitle().replace("(" + remixString + ")", ""));
 			}
 		} 

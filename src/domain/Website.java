@@ -16,6 +16,7 @@ import observer.interfaces.Subject;
 
 import org.joda.time.LocalDate;
 
+import serialization.DBConnector;
 import serialization.Serilizar;
 
 import datamining.DayCrawler;
@@ -126,7 +127,10 @@ public class Website implements Subject
 		Serilizar projectSerilizar = new Serilizar();
 		try
 		{
-			projectSerilizar.storeWebsite(this);
+			DBConnector myDBConnector = new DBConnector();
+		//	projectSerilizar.storeWebsite(this);
+			myDBConnector.storeWebsite(this);
+			//
 
 		} catch (Exception e)
 		{
@@ -150,7 +154,7 @@ public class Website implements Subject
 				// LocalDate dayToReadTo = dayToStartRead.plusDays(1); //TODO
 				// KIM
 
-				DayCrawler crawler = new DayCrawler(myInformation);
+				DayCrawler crawler = new DayCrawler(myInformation, websiteTitle);
 				while (dayToStartRead.isBefore(dayToReadTo))
 				{
 					notifyObservers("We are now reading " + dayToStartRead);
